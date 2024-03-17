@@ -1,0 +1,22 @@
+<!-- TO SHOW THE LINE CHART  ADDED BY THE USER -->
+<div class="d-inline-flex widthHundred" *ngIf="labelToShow && labelToShow.length">
+    <ng-container  *ngFor="let slices of labelToShow">
+        <div  [pTooltip]="slices.name + ' ' + slices.value + '%'" tooltipPosition="top" class="lineHeight"  [style.background-color]="slices.color" [style.width]="(slices.value / getTotalPercentage()) * 100 + '%'"> 
+
+        </div>
+    </ng-container>
+</div>
+<!-- TO SHOW THE LINE CHART  ADDED BY THE USER -->
+
+<!-- TO SHOW THE NAME OF THE VALUE ADDED BY THE USER -->
+<div class="gridClass gapTen mt-4" *ngIf="labelToShow && labelToShow.length">
+    <div class="fontSize d-flex gapfive align-items-center"  *ngFor="let slices of labelToShow">
+        <div class="colorDiv" [style.background-color]="slices.color">
+
+        </div>
+        <div>
+            {{slices.name}} &nbsp; <span class="fontBold"> {{slices.value}}%</span>
+        </div>
+    </div>
+</div>
+<!-- TO SHOW THE NAME OF THE VALUE ADDED BY THE USER -->

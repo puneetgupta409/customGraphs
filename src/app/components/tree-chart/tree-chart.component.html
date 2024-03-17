@@ -1,0 +1,21 @@
+<!-- TO SHOW THE RECTANGLE IN HTML I DIVIDE TWO DIV IN ONE ROW -->
+<div class="rectangle-chart">
+    <div *ngFor="let row of rows" class="row">
+      <div [pTooltip]="item.name + ' ' + item.value + '%'" tooltipPosition="top"  *ngFor="let item of row" class="rectangle heightSet"  [style.width.%]="item.percentage" [style.background-color]="item.color">
+      </div>
+    </div>
+</div>
+<!-- TO SHOW THE RECTANGLE IN HTML I DIVIDE TWO DIV IN ONE ROW -->
+
+<!-- TO SHOW THE NAME OF THE VALUE ADDED BY THE USER -->
+  <div class="gridClass gapTen mt-4" *ngIf="labelToShow && labelToShow.length">
+    <div class="fontSize d-flex gapfive align-items-center"  *ngFor="let slices of labelToShow">
+        <div class="colorDiv" [style.background-color]="slices.color">
+
+        </div>
+        <div>
+            {{slices.name}} &nbsp; <span class="fontBold"> {{slices.value}}%</span>
+        </div>
+    </div>
+</div> 
+<!-- TO SHOW THE NAME OF THE VALUE ADDED BY THE USER -->

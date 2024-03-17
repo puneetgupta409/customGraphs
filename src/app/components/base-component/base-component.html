@@ -1,0 +1,120 @@
+<!-- TO SHOW THE DATA ACCORDING THE USER ADD  -->
+<div class="headerClass d-flex align-items-center justify-content-between">
+    <div>My Application</div>
+    <div class="d-flex align-items-center gapTen">
+        <div class="d-flex align-items-center justify-content-end pe-4">
+            <button (click)="openDataDiagramModal()" class="btn btn-primary" type="button">Add Data Diagram</button>
+        </div>
+        <div class="displaySet">
+            <img class="imageProfile" src="../../../assets/image/profile_image.png">
+        </div>
+    </div>
+</div>
+
+<div class="row p-4 baseComponent">
+    <div class="d-inline-flex flexWrap align-items-center">
+        <div class="childDiv d-flex flex-column align-items-start" *ngFor="let items of categoryArray"
+        [style.min-height.px]="minHeight" [attr.id]="'div-' + items.code">
+            <div class="headingTitle">
+                {{ items.title }}
+            </div>
+            <div>
+                {{ items.description }}
+            </div>
+            <div class="widthHundred mt-2" *ngIf="items.code == 1">
+                <app-pie-chart-component [inputData]="items"></app-pie-chart-component>
+            </div>
+            <div class="widthHundred mt-2" *ngIf="items.code == 2">
+                <app-line-chart-component [inputData]="items"></app-line-chart-component>
+            </div>
+            <div class="widthHundred mt-2" *ngIf="items.code == 3">
+                <app-tree-chart-component [inputData]="items"></app-tree-chart-component>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TO SHOW THE DATA ACCORDING THE USER ADD  -->
+
+<!-- ADD DIAGRAM DATA IN SHAPE -->
+<p-dialog header="Enter Details" [(visible)]="dataDiagramModal" [modal]="true" [draggable]="false" [resizable]="false">
+    <div class="row d-flex flex-column gapTen">
+        <form [formGroup]="createAddDiagramForm" (ngSubmit)="onSubmit()">
+            <div class="">
+                <div>
+                    <label>Title</label>
+                    <input placeholder="Enter Title" formControlName="title" class="form-control mt-1" type="text"
+                        [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
+                    <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                        <div *ngIf="f['title'].errors['required']">Required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <div>
+                    <label>Description</label>
+                    <textarea placeholder="Enter Description" formControlName="description" class="form-control mt-1" type="text"
+                        [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                        <div *ngIf="f['description'].errors['required']">Required</div>
+                        <div *ngIf="f['description'].errors['maxlength']">Maximum length exceeded</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <div class="d-flex flex-column">
+                    <label>Graph type</label>
+                    <p-dropdown appendTo="body" class="mt-1" [options]="graphType" formControlName="graph_type"
+                        optionLabel="graphName" [showClear]="false" placeholder="Select a graph Type"
+                        [ngClass]="{ 'is-invalid': submitted && f['graph_type'].errors }">
+                    </p-dropdown>
+                    <div *ngIf="submitted && f['graph_type'].errors" class="invalid-feedback">
+                        <div *ngIf="f['graph_type'].errors['required']">Required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-1">
+                <div *ngIf="createAddDiagramForm.get('values')">
+                    <div  formArrayName="values">
+                        <div *ngFor="let value of valuesArray; let i = index">
+                            <ng-container [formGroupName]="i">
+                                <div class="d-inline-flex mt-2 flexWrapModal align-items-center widthHundred">
+                                    <div class="widthSet">
+                                        <input class="form-control" placeholder="Name" formControlName="name"
+                                        [ngClass]="{ 'is-invalid': submitted && value.get('name')?.errors?.['required'] }">
+                                        <div  *ngIf="submitted && value.get('name')?.errors?.['required']" class="invalid-feedback">Required</div>
+                                    </div>
+                                    <div class="widthSet">
+                                        <input type="number" class="form-control" placeholder="Value" formControlName="value"
+                                            [ngClass]="{ 'is-invalid': submitted && value.get('value')?.errors }">
+                                        <div *ngIf="submitted && value.get('value')?.errors" class="invalid-feedback">
+                                            <div *ngIf="value.get('value')?.errors?.['required']">Required</div>
+                                            <div *ngIf="value.get('value')?.errors?.['min'] || value.get('value')?.errors?.['max']">Value must be between 1 and 1000</div>
+                                        </div>
+                                    </div> 
+                                    <div (click)="deleteRow(i)" *ngIf="valuesArray && valuesArray.length > 1">
+                                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"/></svg>
+                                    </div>                                                                     
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                           
+            <div class="mt-3">
+                <button type="button" class="addRow" (click)="addValuesInGraph()">Add Row</button>
+            </div>
+            <div class="d-flex justify-content-end align-items gapTen mt-4">
+                <div>
+                    <button type="button" class="cancelButton" (click)="formReset()">Cancel</button>
+                </div>
+                <div>
+                    <button type="submit" class="saveButton">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</p-dialog>
+<!-- ADD DIAGRAM DATA IN SHAPE -->

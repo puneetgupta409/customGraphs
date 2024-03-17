@@ -1,0 +1,27 @@
+.heightSet{
+    height: 6rem;
+}
+
+.rectangle-chart {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0.75rem;
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+    /* margin-bottom: 20px; */
+    flex-wrap: nowrap;
+  }
+  
+  .rectangle {
+    position: relative;
+  }
+  
+  .rectangle .label {
+    // position: absolute;
+    // bottom: -20px; /* Adjust label position */
+    // left: 50%;
+    transform: translateX(-50%);
+  }

@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center justify-content-center">
+    <p-chart height="300px" type="pie" [data]="data" [options]="options"></p-chart>
+</div>
+<div class="gridClass gapTen mt-4" *ngIf="labelToShow && labelToShow.length">
+    <div class="fontSize d-flex gapfive align-items-center"  *ngFor="let slices of labelToShow">
+        <div class="colorDiv" [style.background-color]="slices.color">
+
+        </div>
+        <div>
+            {{slices.name}} &nbsp; <span class="fontBold"> {{slices.value}}%</span>
+        </div>
+    </div>
+</div>

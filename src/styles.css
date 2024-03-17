@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/css/variable.scss';
+html, body { height: 100%; font-family: 'IBMPlexSans'; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: "IBMPlexSans";
+    src: url("assets/fonts/IBMPlexSans.ttf");
+    font-display: swap;
+}
+
+.gapTen{
+    gap: 1rem;
+}
+textarea {
+    resize: none;
+  }
+
+ul {
+    padding-left: 0px !important;
+}
+.widthHundred{
+    width: 100%;
+}
+.form-control{
+    height: 48px;
+}
+
+.fontBold{
+    font-weight: bold;
+}
+.flexWrap{
+    flex-wrap: wrap;
+}
+.fontSize{
+    font-size: 12px;
+}
+.colorDiv{
+    width: 20px;
+    height: 20px;
+}
+.gapfive{
+    gap: 5px;
+}
+.gridClass{
+    display: grid !important;
+    grid-template-columns: 6fr 6fr;
+    @media (max-width: 600px) {
+        grid-template-columns: 12fr;
+        
+    }
+}
